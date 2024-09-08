@@ -1,0 +1,72 @@
+<mat-stepper [linear]="true"
+             #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form class="input-form"
+          [formGroup]="firstFormGroup"
+          (ngSubmit)="onSubmitFirstStep()">
+      <ng-template matStepLabel>Fill out your name</ng-template>
+      <app-input [formControl]="firstFormGroup.controls.login"
+                 [label]="'Login'"
+                 [placeholder]="'Input your email'">
+      </app-input>
+      <app-input [formControl]="firstFormGroup.controls.password"
+                 [label]="'Password'"
+                 [type]="valueTypeEnum.Password"
+                 [additionalErrorTextFunctions]="additionalErrorPasswordFunctions"
+                 [placeholder]="'Input your password'">
+      </app-input>
+      <app-input [formControl]="firstFormGroup.controls.confirmPassword"
+                 [label]="'Confirm password'"
+                 [type]="valueTypeEnum.Password"
+                 [additionalErrorTextFunctions]="additionalErrorPasswordFunctions"
+                 [placeholder]="'Repeat your password'">
+      </app-input>
+      <app-input [formControl]="firstFormGroup.controls.agreement"
+                 [label]="'Agree to work for food'"
+                 [type]="valueTypeEnum.Checkbox">
+      </app-input>
+      <div class="buttons">
+        <button class="button"
+                mat-button
+                matStepperNext
+                [disabled]="!firstFormGroup.valid">
+                Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup"
+            label="Fill out your address">
+    <form class="input-form"
+          [formGroup]="secondFormGroup"
+          (ngSubmit)="onSubmitSecondStep()">
+      <app-input [formControl]="secondFormGroup.controls.country"
+                 [label]="'Country'"
+                 [type]="valueTypeEnum.Dropdown"
+                 [placeholder]="'Choose your country'"
+                 [options]="countries()">
+      </app-input>
+      <app-input [formControl]="secondFormGroup.controls.province"
+                 [label]="'Province'"
+                 [type]="valueTypeEnum.Dropdown"
+                 [placeholder]="'Choose your province'"
+                 [options]="provinces()">
+      </app-input>
+      <div class="buttons">
+
+        <button class="button"
+                mat-button
+                [disabled]="!secondFormGroup.valid"
+                color="accent"
+                type="submit">
+          Save
+        </button>
+        <button class="button"
+                mat-button
+                matStepperPrevious>
+          Back
+        </button>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>

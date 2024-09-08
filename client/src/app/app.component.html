@@ -1,0 +1,25 @@
+<app-spinner></app-spinner>
+<div class="wrapper">
+  <header class="header">
+    <mat-toolbar>
+      <span>Register Application</span>
+      <span class="spacer"></span>
+      @if(isLoggedIn()){
+        <span>{{userName()}}</span>
+        <button mat-icon-button
+                class="icon logout-icon"
+                aria-label="Logout"
+                (click)="onLogout()">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+      }
+    </mat-toolbar>
+  </header>
+
+  <main class="main">
+    <router-outlet></router-outlet>
+  </main>
+  <footer>
+  </footer>
+
+</div>

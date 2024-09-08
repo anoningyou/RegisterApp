@@ -1,0 +1,24 @@
+.input-form {
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  * {
+    width: 100%;
+  }
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  gap: 8px;
+
+  .button {
+    max-width: 50%;
+  }
+}
+

@@ -1,0 +1,61 @@
+@switch (type()) {
+@case (valueTypeEnum.Password) {
+<mat-form-field class="input-field">
+  <mat-label>{{label()}}</mat-label>
+  <input matInput
+         [type]="hidePassword() ? inputType() : 'text'"
+         [formControl]="control"
+         [placeholder]="placeholder()">
+
+  <button class="password-toggle-button"
+          mat-icon-button
+          matSuffix
+          (click)="onTogglePasswordVisibility()"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePassword()">
+    <mat-icon>{{hidePassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </button>
+  @if (control.invalid){
+  <mat-error class="error">{{getErrorMessage()}}</mat-error>
+  }
+</mat-form-field>
+}
+@case (valueTypeEnum.Dropdown) {
+<mat-form-field class="input-field">
+  <mat-label>{{label()}}</mat-label>
+  <mat-select [formControl]="control"
+  [placeholder]="placeholder()">
+    <mat-option>--</mat-option>
+    @for (option of options(); track option.key) {
+    <mat-option [value]="option.key">{{option.value}}</mat-option>
+    }
+  </mat-select>
+  @if (control.invalid){
+  <mat-error class="error">{{getErrorMessage()}}</mat-error>
+  }
+</mat-form-field>
+}
+
+@case (valueTypeEnum.Checkbox) {
+  <div class="input-field">
+    <mat-checkbox matInput [formControl]="control">{{!!showLabel()? label() : ""}}</mat-checkbox>
+    @if ((control.touched || control.dirty) && control.invalid){
+    <mat-error class="error">{{getErrorMessage()}}</mat-error>
+    }
+  </div>
+  }
+@default {
+<mat-form-field class="input-field">
+  @if(showLabel()){
+  <mat-label>{{label()}}</mat-label>
+  }
+  <input matInput
+         [type]="inputType()"
+         [formControl]="control"
+         [placeholder]="placeholder()" />
+  @if (control.invalid){
+  <mat-error class="error">{{getErrorMessage()}}</mat-error>
+  }
+</mat-form-field>
+}
+}
